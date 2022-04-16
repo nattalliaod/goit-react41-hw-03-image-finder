@@ -7,8 +7,9 @@ const modalRoot = document.querySelector('#modal-root');
 
 export class Modal extends Component {
     static propTypes = {
+        src: PropTypes.string.isRequired,
+        alt: PropTypes.string.isRequired,
         onClick: PropTypes.func.isRequired,
-        children: PropTypes.node.isRequired,
     };
 
     componentDidMount() {
@@ -32,10 +33,11 @@ export class Modal extends Component {
     };
 
     render() {
+        const { src, alt } = this.props;
         return createPortal(
             <ModalBackdrop onClick={this.handleBackdropClick}>
                 <ModalWindow>
-                    {this.props.children}
+                    <img src={src} alt={alt}/>
                 </ModalWindow>
             </ModalBackdrop>,
             modalRoot,

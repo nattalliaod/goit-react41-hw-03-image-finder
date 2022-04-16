@@ -5,7 +5,12 @@ import { GalleryList } from './ImageGallery.styled';
 export const ImageGallery = ({ gallery, onClick }) => {
     return <GalleryList>
         {gallery.map(({webformatURL, largeImageURL, tags},idx) => (
-            <ImageGalleryItem key={idx} src={webformatURL} url={largeImageURL} alt={tags} onClick={onClick}/>
+            <ImageGalleryItem
+                key={idx}
+                src={webformatURL}
+                url={largeImageURL}
+                alt={tags}
+                onClick={onClick} />
         ))}
     </GalleryList>
 }

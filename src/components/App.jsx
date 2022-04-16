@@ -19,7 +19,7 @@ export class App extends Component {
     showModal: false,
     isLoading: false,
     largeUrl: null,
-    altTitle: null
+    alt: null,
   };
 
   async componentDidUpdate(_, prevState) {
@@ -38,7 +38,8 @@ export class App extends Component {
           this.scrollToBottom();
       })
  }  
-   } catch {
+   }
+   catch {
      toast.error('Enter other query', {
                 theme: 'colored',
               });
@@ -50,7 +51,7 @@ export class App extends Component {
   };
 
    handleFormSubmit = query => {
-    this.setState({ query, gallery: [], status: 'pending'});
+    this.setState({ query, gallery: [], page: 1, status: 'pending'});
   };
 
   handleLoadMoreButton = () => {
@@ -62,20 +63,20 @@ export class App extends Component {
   }));
 
   onImageClick = e => {
-  
     if (e.target.nodeName !== 'IMG') {
       return;
     }
 
     this.setState({
       largeUrl: e.target.getAttribute('data-src'),
-      altTitle: e.target.getAttribute('alt'),
-      showModal: true,
+      alt: e.target.getAttribute('alt'),
     });
+
+    this.toggleModal();
   };
   
   render() {
-    const { gallery, status, showModal,isLoading,largeUrl, altTitle } = this.state;
+    const { gallery, status, showModal, isLoading, largeUrl, alt } = this.state;
   
     return (
       <>
@@ -91,14 +92,7 @@ export class App extends Component {
               {gallery.length >= 12 && !isLoading && <Button onClick={this.handleLoadMoreButton} />}
             </>
           )}
-     
-          {showModal && (
-            <>
-              <Modal onClick={this.toggleModal}>
-                <img src={largeUrl} alt={altTitle} />
-              </Modal>
-            </>
-          )}
+          {showModal && <Modal src={largeUrl} alt={alt} onClick={this.toggleModal} />}
           <ToastContainer autoClose={3000} />
         </Container>
       </>

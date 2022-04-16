@@ -3,7 +3,11 @@ import { ItemGallery, ImgItem } from './ImageGalleryItem.styled';
 
 export const ImageGalleryItem = ({ onClick, src, alt, url }) => {
     return <ItemGallery>
-        <ImgItem onClick={onClick} src={src} data-src={url} alt={alt}/>
+        <ImgItem
+            onClick={onClick}
+            src={src}
+            data-src={url}
+            alt={alt} />
     </ItemGallery>
 }
 
